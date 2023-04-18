@@ -1,3 +1,4 @@
+//Import router for rerouting
 import { Link } from "react-router-dom"
 
 

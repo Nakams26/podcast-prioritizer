@@ -1,9 +1,14 @@
+//Importing style from SASS
 import './styles/sass/style.scss';
-import Footer from './components/Footer';
+
+// Importing components
+
 import Header from './components/Header';
-import Error from './components/Error';
 import Welcome from './components/Welcome';
-import UserForm from './components/UserForm';
+import UserSearch from './components/UserSearch';
+import Footer from './components/Footer';
+import Error from './components/Error';
+
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -13,7 +18,7 @@ function App() {
       <Header/>
       <Routes>
       <Route path="/" element={<Welcome />} />
-      <Route path="/podcast" element={<UserForm />} />
+      <Route path="/podcast" element={<UserSearch />} />
         <Route path='*' element={<Error />}/>
       </Routes>
      <Footer/>
