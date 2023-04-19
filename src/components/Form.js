@@ -3,9 +3,16 @@
 //Importing modules needed for autocompletion
 import usePlacesAutocomplete from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
+import { useState } from "react";
 
+const Form = (props) => {
+  //Podcast variable
+  const [podcast, setPodcast] = useState("");
+  const handlePodcast = (e) => {
+    // Update the keyword of the input element
+    setPodcast(e.target.value);
+  };
 
-const TravelForm = () => {
   //From variable
   const {
     ready: readyFrom,
@@ -14,12 +21,8 @@ const TravelForm = () => {
     setValue: setValueFrom,
     clearSuggestions: clearSuggestionsFrom,
   } = usePlacesAutocomplete({
-    requestOptions: {
-      /* Define search scope here */
-    },
     debounce: 300,
   });
- 
 
   //destination variable
   const {
@@ -29,12 +32,9 @@ const TravelForm = () => {
     setValue: setValueTo,
     clearSuggestions: clearSuggestionsTo,
   } = usePlacesAutocomplete({
-    requestOptions: {
-      /* Define search scope here */
-    },
     debounce: 300,
   });
-  
+
   const refFrom = useOnclickOutside(() => {
     // When user clicks outside of the component, we can dismiss
     // the searched suggestions by calling this method
@@ -94,16 +94,23 @@ const TravelForm = () => {
         place_id,
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
-
       return (
         <li key={place_id} onClick={handleSelectTo(suggestion)}>
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
     });
-
   return (
-    <>
+    <form
+      onSubmit={(event) => {
+        // Using props to pass data to the parent element
+        props.setFrom(event, valueFrom);
+        props.setTo(event, valueTo);
+        props.setPodcast(event, podcast);
+        props.onSubmitTravel(event);
+      }}
+      action=""
+    >
       <div ref={refFrom}>
         <label htmlFor="from" className="sr-only">
           Where are you starting from?
@@ -132,7 +139,17 @@ const TravelForm = () => {
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
         {statusTo === "OK" && <ul>{renderSuggestionsTo()}</ul>}
       </div>
-    </>
+      <label htmlFor="podcast"></label>
+      <input
+        id="podcast"
+        type="text"
+        onChange={handlePodcast}
+        placeholder="Search for type of podcast (i.e 'cooking' or 'raptors)'"
+      />
+      <button type="submit">Submit</button>
+    </form>
   );
 };
-export default TravelForm;
+export default Form;
+
+
