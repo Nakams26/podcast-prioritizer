@@ -12,8 +12,8 @@ import axios from "axios";
 const UserSearch = () => {
   //TRAVEL
   //message useState serves as a loading state (message will be seen for .5 seconds), and error handling -> general multipurpose.
-  const [message, setMessage] = useState("");
-
+  const [messagePodcast, setMessagePodcast] = useState("");
+  const [messageTravel, setMessageTravel] = useState("");
   //Defining from state  (coming from from component)
   const [from, setFrom] = useState("");
 
@@ -31,9 +31,9 @@ const UserSearch = () => {
   const handleUserChoice = (e, travelChoice) => {
     e.preventDefault();
     setUserChoice(travelChoice);
-    console.log(userChoice);
   };
 
+  //USER CHOICES
   const [walkTime, setWalkTime] = useState("");
   // walkTime useState will hold the estimated travel by walk that we retrieve from the MapQuest API.
   const [bikeTime, setBikeTime] = useState("");
@@ -42,25 +42,27 @@ const UserSearch = () => {
   // bikeTime useState will hold the estimated travel by bike that we retrieve from the MapQuest API.
 
   //**Setting new parameters in order to reformat the walkTime that we received from the API call above:
-const [walkHours, walkMinutes, walkSeconds] = walkTime.split(":").map(Number);
-//Estimated walk time data was received in hours, minutes, and seconds and separated by colons.
-//We used split to get rid of the colons.
-const totalWalkMinutes = Math.round(
-  walkHours * 60 + walkMinutes + walkSeconds / 60
-);
-///Math round was used to remove the decimals.
-//The math was done in order to get everything converted to minutes.
+  const [walkHours, walkMinutes, walkSeconds] = walkTime.split(":").map(Number);
+  //Estimated walk time data was received in hours, minutes, and seconds and separated by colons.
+  //We used split to get rid of the colons.
+  const totalWalkMinutes = Math.round(
+    walkHours * 60 + walkMinutes + walkSeconds / 60
+  );
+  ///Math round was used to remove the decimals.
+  //The math was done in order to get everything converted to minutes.
 
-//Setting new parameters in order to reformat the bikeTime that we received from the API call above.
-const [bikeHours, bikeMinutes, bikeSeconds] = bikeTime.split(":").map(Number);
-const totalBikeMinutes = Math.round(
-  bikeHours * 60 + bikeMinutes + bikeSeconds / 60
-);
+  //Setting new parameters in order to reformat the bikeTime that we received from the API call above.
+  const [bikeHours, bikeMinutes, bikeSeconds] = bikeTime.split(":").map(Number);
+  const totalBikeMinutes = Math.round(
+    bikeHours * 60 + bikeMinutes + bikeSeconds / 60
+  );
 
-const [driveHours, driveMinutes, driveSeconds] = driveTime.split(":").map(Number);
-const totalDriveMinutes = Math.round(
-  driveHours * 60 + driveMinutes + driveSeconds / 60
-);
+  const [driveHours, driveMinutes, driveSeconds] = driveTime
+    .split(":")
+    .map(Number);
+  const totalDriveMinutes = Math.round(
+    driveHours * 60 + driveMinutes + driveSeconds / 60
+  );
 
   //Handling from update
 
@@ -80,9 +82,12 @@ const totalDriveMinutes = Math.round(
   // Function to prevent reload
   const submit = (e) => {
     e.preventDefault();
+    setPodcastList([]);
+    setUserChoice("");
   };
   // Use Effect to do my api call when there is a change on the from and to and on the podcast topic
   useEffect(() => {
+    setMessagePodcast("");
     if (from.trim() === "" || to.trim() === "" || podcastSearch.trim() === "") {
       setPodcastList([]);
       setWalkTime("0");
@@ -104,22 +109,21 @@ const totalDriveMinutes = Math.round(
           if (resp.data.info.statuscode === 0) {
             //Status code is an actual number therefore we must set the === to a number.
             setWalkTime(resp.data.route.formattedTime);
-            setMessage("");
           } else if (resp.data.info.statuscode === 402) {
             setWalkTime("0");
             //We had to setWalkTime to a string number instead of just number -> wouldn't work otherwise -> we suspect that its because of the split function that we ran earlier -> maybe one day we'll know exactly why.
-            setMessage("Sorry, no route was found.");
+            setMessageTravel("Sorry, no route was found.");
           } else {
-            setMessage("");
+            setMessageTravel("");
           }
         })
         //Error handling for API call.
         .catch((error) => {
-          setMessage(
+          setMessageTravel(
             "Sorry, something went wrong with our mapping. Try again shortly!"
           );
         });
-      setMessage("Please wait, calculating route...");
+      setMessageTravel("Please wait, calculating route...");
       axios({
         url: "https://www.mapquestapi.com/directions/v2/route",
         method: "GET",
@@ -139,18 +143,18 @@ const totalDriveMinutes = Math.round(
           } else if (resp.data.info.statuscode === 402) {
             setBikeTime("0");
             //We had to setWalkTime to a string number instead of just number -> wouldn't work otherwise -> we suspect that its because of the split function that we ran earlier -> maybe one day we'll know exactly why.
-            setMessage("Sorry, no route was found.");
+            setMessageTravel("Sorry, no route was found.");
           } else {
-            setMessage("");
+            setMessageTravel("");
           }
         })
         //Error handling for API call.
         .catch((error) => {
-          setMessage(
+          setMessageTravel(
             "Sorry, something went wrong with our mapping. Try again shortly!"
           );
         });
-      setMessage("Please wait, calculating route...");
+      setMessageTravel("Please wait, calculating route...");
       axios({
         url: "https://www.mapquestapi.com/directions/v2/route",
         method: "GET",
@@ -170,35 +174,36 @@ const totalDriveMinutes = Math.round(
           } else if (resp.data.info.statuscode === 402) {
             setDriveTime("0");
             //We had to setWalkTime to a string number instead of just number -> wouldn't work otherwise -> we suspect that its because of the split function that we ran earlier -> maybe one day we'll know exactly why.
-            setMessage("Sorry, no route was found.");
+            setMessageTravel("Sorry, no route was found.");
           } else {
-            setMessage("");
+            setMessageTravel("");
           }
         })
         //Error handling for API call.
         .catch((error) => {
-          setMessage(
+          setMessageTravel(
             "Sorry, something went wrong with our mapping. Try again shortly!"
           );
         });
-        let minLength;
-    let maxLength;
-    if (userChoice === "walk") {
-      minLength = totalWalkMinutes - 10;
-      maxLength = totalWalkMinutes + 10;
-    } else if (userChoice === "bike") {
-      minLength = totalBikeMinutes - 10;
-      maxLength = totalBikeMinutes + 10;
-    }else if (userChoice === "drive") {
-      minLength = totalDriveMinutes - 10;
-      maxLength = totalDriveMinutes + 10;
-    } else {
-      minLength = 0;
-      maxLength = 6000;
-    }
-    setPodcastList([]);
 
-         if (maxLength <=6000) {
+      let minLength;
+      let maxLength;
+      if (userChoice === "walk") {
+        minLength = totalWalkMinutes - 10;
+        maxLength = totalWalkMinutes + 10;
+      } else if (userChoice === "bike") {
+        minLength = totalBikeMinutes - 10;
+        maxLength = totalBikeMinutes + 10;
+      } else if (userChoice === "drive") {
+        minLength = totalDriveMinutes - 10;
+        maxLength = totalDriveMinutes + 10;
+      } else {
+        minLength = 0;
+        maxLength = 6000;
+      }
+      setPodcastList([]);
+
+      if (maxLength <= 6000) {
         const { Client } = require("podcast-api");
 
         // If apiKey is null, then we will connect to a mock server
@@ -207,46 +212,40 @@ const totalDriveMinutes = Math.round(
         client
           .search({
             q: podcastSearch,
-            type: "podcast",
+            sort_by_date: 0,
             offset: 0,
             len_min: minLength,
             len_max: maxLength,
+            type: "podcast",
             only_in: "title,description",
             language: "English",
-            page_size: 10,
+            page_size: 6,
           })
           .then((response) => {
-            setMessage("");
+            setMessagePodcast("");
             if (response.data.results.length === 0) {
-              setMessage(
+              setMessagePodcast(
                 "Sorry, we couldn't find any podcasts like that, try a different search!"
               );
-  
-              //Refer to lines 156 to 163.
+
               //General error handling:
             } else {
               //If no errors, we have the API display the filtered list -> Update the state of the podcast list with the API.
-              setPodcastList(
-                response.data.results.map((list) => {
-                  setMessage(
-                    "Here are some podcasts you can listen to on your trip!"
-                  );
-                  return list;
-                })
-              );
+              setPodcastList(response.data.results);
             }
           })
           .catch((error) => {
-            setMessage(
+            setMessagePodcast(
               "Sorry, something went wrong with our podcast API. Try again shortly!"
             );
           });
-        } else {
-          setMessage("Sorry, we couldn't find any podcasts that match the length of your trip, try a different search!");
-        }
+      } else {
+        setMessagePodcast(
+          "Sorry, we couldn't find any podcasts that match the length of your trip, try a different search!"
+        );
+      }
     }
-  }, [from, to, podcastSearch,userChoice]);
-
+  }, [from, to, podcastSearch, userChoice]);
 
   return (
     <section className="form">
@@ -258,17 +257,17 @@ const totalDriveMinutes = Math.round(
           setPodcast={handlePodcastSearch}
         />
         <TravelResult
-          message={message}
+          message={messageTravel}
           walk={walkTime}
           bike={bikeTime}
           drive={driveTime}
           userChoice={handleUserChoice}
         />
-        <PodcastResult podcastList={podcastList}/>
-        <div className="message">
-          {" "}
-          <p>{message}</p>{" "}
-        </div>
+        <PodcastResult
+          message={messagePodcast}
+          podcastList={podcastList}
+          search={podcastSearch}
+        />
       </div>
     </section>
   );
