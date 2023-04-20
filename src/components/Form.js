@@ -49,7 +49,8 @@ const Form = (props) => {
 
   const handleInputFrom = (e) => {
     // Update the keyword of the input element
-    setValueFrom(e.target.value);
+    setValueFrom(e.target.value)
+ 
   };
   const handleInputTo = (e) => {
     // Update the keyword of the input element
@@ -61,7 +62,9 @@ const Form = (props) => {
     () => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
-      setValueFrom(description, false);
+
+      setValueFrom(description, false)
+
       clearSuggestionsFrom();
     };
 
@@ -71,6 +74,7 @@ const Form = (props) => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
       setValueTo(description, false);
+
       clearSuggestionsTo();
     };
 
@@ -100,6 +104,7 @@ const Form = (props) => {
         </li>
       );
     });
+ 
   return (
     <form
       onSubmit={(event) => {
@@ -107,7 +112,7 @@ const Form = (props) => {
         props.setFrom(event, valueFrom);
         props.setTo(event, valueTo);
         props.setPodcast(event, podcast);
-        props.onSubmitTravel(event);
+        props.onSubmitTest(event)
       }}
       action=""
     >
