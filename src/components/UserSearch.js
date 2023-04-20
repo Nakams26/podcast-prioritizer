@@ -10,15 +10,32 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const UserSearch = () => {
+
+  //TRAVEL
   //message useState serves as a loading state (message will be seen for .5 seconds), and error handling -> general multipurpose.
   const [message, setMessage] = useState("");
 
   //Defining from state  (coming from from component)
   const [from, setFrom] = useState("");
+
   //Defining from to (coming from form component)
   const [to, setTo] = useState("");
+
+
+
+  //PODCAST
   //Defining podcast search  (coming form form component)
   const [podcastSearch, setPodcastSearch] = useState("");
+  // The podcastList useState will be used to hold the API data.
+  const [podcastList, setPodcastList] = useState([]);
+  //Adding userChoice
+  const [userChoice, setUserChoice]=useState('')
+
+  const handleUserChoice = (e, travelChoice) => {
+    e.preventDefault()
+    setUserChoice(travelChoice)
+    console.log(userChoice)
+  }
 
   const [walkTime, setWalkTime] = useState("");
   // walkTime useState will hold the estimated travel by walk that we retrieve from the MapQuest API.
@@ -47,10 +64,21 @@ const UserSearch = () => {
     e.preventDefault();
     if (from.trim() === "" || to.trim() === "") {
       setMessage("Please enter a valid travel search");
+      setPodcastList([]);
+      setWalkTime("0");
+      setBikeTime("0");
+    } else if (from.trim() !== "" && to.trim() !== "" && podcastSearch.trim() ==="") {
+      setMessage("Please enter a valid podcast search");
     }
+    
   };
   // Use Effect to do my api call when there is a change on the from and to and on the podcast topic
   useEffect(() => {
+    if (from.trim() === "" || to.trim() === "" || podcastSearch.trim() ==="" ) {
+      setPodcastList([]);
+      setWalkTime("0");
+      setBikeTime("0");
+    } else {
     axios({
       url: "https://www.mapquestapi.com/directions/v2/route",
       method: "GET",
@@ -148,6 +176,7 @@ const UserSearch = () => {
           "Sorry, something went wrong with our mapping. Try again shortly!"
         );
       });
+    }
   }, [from, to, podcastSearch]);
 
   return (
@@ -164,6 +193,7 @@ const UserSearch = () => {
           walk={walkTime}
           bike={bikeTime}
           drive={driveTime}
+          userChoice={handleUserChoice}
         />
         <PodcastResult />
         <div className="message">

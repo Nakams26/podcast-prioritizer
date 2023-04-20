@@ -14,9 +14,15 @@ const TravelResult = (props) => {
             <p>
               Select an option to get a podcast that match your travel length
             </p>
-            <button>Let's walk!</button>
-            <button>Let's bike!</button>
-            <button>Let's drive!</button>
+            <button onClick={(event)=>{
+                props.userChoice(event, event.target.value)
+            }} type="button" value="walk">Let's walk!</button>
+            <button onClick={(event)=>{
+                props.userChoice(event, event.target.value)
+            }} type="button" value="bike">Let's bike!</button>
+            <button onClick={(event)=>{
+                props.userChoice(event, event.target.value)
+            }} type="button" value="drive">Let's drive!</button>
           </>
         ) : null }
       </div>
