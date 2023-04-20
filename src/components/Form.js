@@ -121,6 +121,7 @@ const Form = (props) => {
           Where are you starting from?
         </label>
         <input
+        required
           id="from"
           value={valueFrom}
           onChange={handleInputFrom}
@@ -135,6 +136,7 @@ const Form = (props) => {
           Where are you heading to?
         </label>
         <input
+        required
           id="to"
           value={valueTo}
           onChange={handleInputTo}
@@ -146,6 +148,7 @@ const Form = (props) => {
       </div>
       <label htmlFor="podcast"></label>
       <input
+      required
         id="podcast"
         type="text"
         onChange={handlePodcast}
