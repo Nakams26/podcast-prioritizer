@@ -14,6 +14,7 @@
         z-index: 10;
         rotate: -10deg;
         text-shadow: 3px 5px 1px $thirdColor;
+        -webkit-text-stroke: 1px $primaryColor;
     }
 
     .flexWelcome{
@@ -31,14 +32,17 @@
         z-index: 10;
         color: $secondaryColor;
         span{
+   
             color: $secondaryColor;
             display: block;
             font-weight: bold;
             transition: 1s;
+   
         }
         span:hover, span:focus {
             color: $thirdColor;
             transform: scale(1.1);
+            -webkit-text-stroke: 1px $thirdColor;
         }
     }
  
@@ -47,4 +51,8 @@
         width: 500px;
         animation: circle 5s linear infinite;
     }
+}
+
+main {
+    height: 80vh;
 }

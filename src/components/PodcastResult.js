@@ -14,7 +14,7 @@ const PodcastResult = (props) => {
         {(props.podcastList.length === 0 && props.search.trim() !== "") ||
         props.podcastList.length !== 0 ? (
           <>
-            <h3>Podcast result</h3>
+            <p> <span>Step 3: </span>Select your podcast!</p>
             <p>{props.message}</p>
             <ul>
               {props.podcastList.map((list) => {

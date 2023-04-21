@@ -221,8 +221,8 @@ const UserSearch = () => {
   }, [from, to, podcastSearch, userChoice]);
 
   return (
-    <section className="form">
-      <div className="wrapper">
+    <main>
+        <div className="flexSection wrapper">
         <Form
           onSubmitTest={submit}
           setFrom={handleFrom}
@@ -236,14 +236,15 @@ const UserSearch = () => {
           drive={driveTime}
           userChoice={handleUserChoice}
         />
+        </div>
         <PodcastResult
           message={messagePodcast}
           podcastList={podcastList}
           search={podcastSearch}
         />
-        <p>{message}</p>
-      </div>
-    </section>
+        <p>{to.trim()==="" || from.trim() === "" || podcastSearch.trim() ==="" ? message :null}</p>
+
+    </main>
   );
 };
 

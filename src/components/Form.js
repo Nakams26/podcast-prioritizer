@@ -97,7 +97,11 @@ const Form = (props) => {
       );
     });
   return (
+    <section className="form">
+
+    <p> <span>Step 1:</span>  Please enter your travel and a podcast topic!</p>
     <form
+    className="formFlex"
       onSubmit={(event) => {
         // Using props to pass data to the parent element
         props.setFrom(event, valueFrom);
@@ -147,6 +151,7 @@ const Form = (props) => {
       />
       <button type="submit">Submit</button>
     </form>
+    </section>
   );
 };
 export default Form;

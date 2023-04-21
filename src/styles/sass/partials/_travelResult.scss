@@ -1,0 +1,25 @@
+@use "./variables" as *;
+
+.travelResult {
+ text-align: center;
+  width: 49%;
+  p {
+    font-size: 1.2rem;
+
+    color: $secondaryColor;
+    padding: 10px 0;
+    span {
+      font-weight: bold;
+    }
+  }
+  button {
+    padding: 5px;
+    font-family: $mainFont;
+    margin: 5px 5px;
+    background-color: $thirdColor;
+  }
+  .button{
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

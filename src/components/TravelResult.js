@@ -7,13 +7,11 @@ const TravelResult = (props) => {
          <p>{props.message}</p>
         {props.walk && props.bike && props.drive && props.walk !== "0" && props.bike !== "0" && props.drive !== "0"? (
           <>
-            <h3>Travel result</h3>
-            <p>Here's your walking time : {props.walk}</p>
-            <p>Here's your biking time : {props.bike}</p>
-            <p>Here's your driving time : {props.drive}</p>
-            <p>
-              Select an option to get a podcast that match your travel length
-            </p>
+           <p> <span>Step 2: </span>Select if you prefer to walk, bike or drive and we'll find a podcast that match your travel length!</p>
+            <p>Walking time : {props.walk}</p>
+            <p>Biking time : {props.bike}</p>
+            <p>Driving time : {props.drive}</p>
+            <div className="button">
             <button onClick={(event)=>{
                 props.userChoice(event, event.target.value)
             }} type="button" value="walk">Let's walk!</button>
@@ -23,6 +21,7 @@ const TravelResult = (props) => {
             <button onClick={(event)=>{
                 props.userChoice(event, event.target.value)
             }} type="button" value="drive">Let's drive!</button>
+            </div>
           </>
         ) : null }
       </div>

@@ -1,0 +1,23 @@
+@use "./variables" as *;
+
+.podcastResult{
+    p{
+        font-size: 1.2rem;
+        color: $secondaryColor;
+        padding: 10px 0;
+        span{
+            font-weight: bold;
+        }
+      
+    }
+    ul {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        li{
+            width: calc((100% / 3 ) - 40px);
+            min-width: 300px;
+        }
+       }
+}

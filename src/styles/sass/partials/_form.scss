@@ -1,0 +1,45 @@
+@use "./variables" as *;
+
+.form {
+    text-align: center;
+ width: 49%;
+    p {
+        font-size: 1.2rem;
+        color: $secondaryColor;
+        padding: 10px 0;
+        span{
+            font-weight: bold;
+        }
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+   
+        input, button{
+            text-align: center;
+            font-family: $mainFont;
+            padding: 5px;
+            margin: 5px 0;
+          width: 100%;
+          color: black;
+          background-color: $thirdColor;
+        }
+            li{ 
+                padding: 5px;
+                font-family: $mainFont;
+                background-color: white;
+                border-bottom: 1px solid black;
+            }
+            li:hover, li:focus{
+                background-color: $primaryColor;
+                color: white;
+            }
+    }
+}
+
+.flexSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
