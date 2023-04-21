@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -223,6 +225,7 @@ html {
 html {
     font-size: 125%;
     position: relative;
+
 }
 
 .wrapper {
@@ -239,4 +242,16 @@ img {
 
 li{
   list-style: none;
+}
+
+p{
+ font-family: $mainFont;
+}
+
+h1, h2, h3{
+  font-family: $headingFont;
+}
+
+a{
+  text-decoration: none;
 }

@@ -12,7 +12,6 @@ const Form = (props) => {
     // Update the keyword of the input element
     setPodcast(e.target.value);
   };
-
   //From variable
   const {
     ready: readyFrom,
@@ -23,7 +22,6 @@ const Form = (props) => {
   } = usePlacesAutocomplete({
     debounce: 300,
   });
-
   //destination variable
   const {
     ready: readyTo,
@@ -49,8 +47,7 @@ const Form = (props) => {
 
   const handleInputFrom = (e) => {
     // Update the keyword of the input element
-    setValueFrom(e.target.value)
- 
+    setValueFrom(e.target.value);
   };
   const handleInputTo = (e) => {
     // Update the keyword of the input element
@@ -62,9 +59,7 @@ const Form = (props) => {
     () => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
-
-      setValueFrom(description, false)
-
+      setValueFrom(description, false);
       clearSuggestionsFrom();
     };
 
@@ -74,7 +69,6 @@ const Form = (props) => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
       setValueTo(description, false);
-
       clearSuggestionsTo();
     };
 
@@ -84,14 +78,12 @@ const Form = (props) => {
         place_id,
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
-
       return (
         <li key={place_id} onClick={handleSelectFrom(suggestion)}>
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
     });
-
   const renderSuggestionsTo = () =>
     dataTo.map((suggestion) => {
       const {
@@ -104,7 +96,6 @@ const Form = (props) => {
         </li>
       );
     });
- 
   return (
     <form
       onSubmit={(event) => {
@@ -112,7 +103,7 @@ const Form = (props) => {
         props.setFrom(event, valueFrom);
         props.setTo(event, valueTo);
         props.setPodcast(event, podcast);
-        props.onSubmitTest(event)
+        props.onSubmitTest(event);
       }}
       action=""
     >
@@ -121,7 +112,7 @@ const Form = (props) => {
           Where are you starting from?
         </label>
         <input
-        required
+          required
           id="from"
           value={valueFrom}
           onChange={handleInputFrom}
@@ -136,7 +127,7 @@ const Form = (props) => {
           Where are you heading to?
         </label>
         <input
-        required
+          required
           id="to"
           value={valueTo}
           onChange={handleInputTo}
@@ -148,7 +139,7 @@ const Form = (props) => {
       </div>
       <label htmlFor="podcast"></label>
       <input
-      required
+        required
         id="podcast"
         type="text"
         onChange={handlePodcast}
@@ -159,5 +150,3 @@ const Form = (props) => {
   );
 };
 export default Form;
-
-
