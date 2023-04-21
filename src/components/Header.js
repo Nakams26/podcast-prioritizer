@@ -7,7 +7,7 @@ const Header = () => {
         <header>
             <div className="wrapper flexHeader">
             <Link to="/">
-                <h1>P<span>P</span> </h1>
+                <p>P<span>P</span> </p>
                 </Link>
                 <div className="imgContainer">
                     <img src={podcastLogo} alt="" />

@@ -1,0 +1,50 @@
+@use "./variables" as *;
+
+.welcomePage{
+    height: 75vh;
+    background-color: $primaryColor;
+    position: relative;
+    h1{
+        font-size: 4.2rem;
+        margin: 0;
+        color: $secondaryColor;
+        margin-top: 4rem;
+        position: relative;
+        top: 100px;
+        z-index: 10;
+        rotate: -10deg;
+        text-shadow: 3px 5px 1px $thirdColor;
+    }
+
+    .flexWelcome{
+        height: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .textWelcome{
+        text-align: center;
+        font-size: 1.5rem;
+        position: relative;
+        bottom: 165px;
+        z-index: 10;
+        color: $secondaryColor;
+        span{
+            color: $secondaryColor;
+            display: block;
+            font-weight: bold;
+            transition: 1s;
+        }
+        span:hover, span:focus {
+            color: $thirdColor;
+            transform: scale(1.1);
+        }
+    }
+ 
+    img{
+        position: relative;
+        width: 500px;
+        animation: circle 5s linear infinite;
+    }
+}

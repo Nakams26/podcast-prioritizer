@@ -1,4 +1,10 @@
+@use "./variables" as *;
+
 footer {
+    background-color: $primaryColor;
+    color: $secondaryColor;
+    position: relative;
+    bottom: -30px;
     text-align: center;
-    color: blue;
+
 }
