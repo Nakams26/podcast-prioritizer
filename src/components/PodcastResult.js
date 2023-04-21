@@ -11,11 +11,12 @@ const PodcastResult = (props) => {
   return (
     <section className="podcastResult">
       <div className="wrapper">
-        {(props.podcastList.length ===0 && props.search !=="") || (props.podcastList.length !==0) ? (
+
+        {(props.podcastList.length ===0 && props.search.trim() !=="") || (props.podcastList.length !==0) ? (
           <>
+              <p>{props.message}</p>
             <h3>Podcast result</h3>
             <ul>
-              <p>{props.message}</p>
               {props.podcastList.map((list) => {
                 const lengthInMin = Math.round(list.audio_length_sec / 60);
                 const newDescription = removeTags(list.description_original);

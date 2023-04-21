@@ -4,7 +4,7 @@ const TravelResult = (props) => {
   return (
     <section className="travelResult">
       <div className="wrapper">
-     
+         <p>{props.message}</p>
         {props.walk && props.bike && props.drive && props.walk !== "0" && props.bike !== "0" && props.drive !== "0"? (
           <>
             <h3>Travel result</h3>
