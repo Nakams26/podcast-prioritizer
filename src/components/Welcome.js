@@ -10,7 +10,7 @@ const Welcome = () => {
           Are you going somewhere? Let us know your travel, we'll find a podcast
           for you!</p></div>
           <Link to="/podcast">
-            <p> Click here to start</p>
+            <p className="link"> Click here to start</p>
           </Link>
      
       </div>

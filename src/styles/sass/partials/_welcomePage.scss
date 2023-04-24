@@ -30,10 +30,11 @@
         margin-top: 20px;
         font-size: 1.5rem;
         color: $secondaryColor;
+        font-weight: bold;
         -webkit-text-stroke: 1px $primaryColor;
        
     }
-    p{
+    .link{
         color: $secondaryColor;
         display: block;
         font-weight: bold;
@@ -41,7 +42,7 @@
         font-size: 1.5rem;
 
     }
-    p:hover, p:focus {
+    .link:hover, .link:focus {
         color: $thirdColor;
         transform: scale(1.1);
         -webkit-text-stroke: 1px $thirdColor;
