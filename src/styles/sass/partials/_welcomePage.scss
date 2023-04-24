@@ -4,33 +4,30 @@
     height: 80vh;
     background-color: $primaryColor;
     position: relative;
+    background-image: url(../../../assets/vecteezy_vinyl-record-vector-illustration-isolated-on-white-background_9313617_181.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     
     h1{
         font-size: 4.2rem;
         margin: 0;
         color: $secondaryColor;
-        margin-top: 4rem;
-        position: relative;
-        top: 100px;
-        z-index: 10;
         rotate: -10deg;
         text-shadow: 3px 5px 1px $thirdColor;
         -webkit-text-stroke: 1px $primaryColor;
     }
 
     .flexWelcome{
-        height: 65%;
+        height: 80%;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
     }
     .textWelcome{
         text-align: center;
         font-size: 1.5rem;
-        position: relative;
-        bottom: 165px;
-        z-index: 10;
         color: $secondaryColor;
         span{
    
