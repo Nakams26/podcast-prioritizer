@@ -8,12 +8,6 @@ const PodcastResult = (props) => {
     return str.replace(/(<([^>]+)>)/gi, "");
   }
 
-  function removeLinks(str) {
-    // Regular expression to identify HTML tags in
-    // the input string. Replacing the identified
-    // HTML tag with a null string.
-    return str.replace(/(Support this podcast: https:\/\/podcasters\.spotify.com\/pod\/show\/)/gi, "");
-  }
   return (
     <section className="podcastResult">
       <div className="wrapper">
@@ -28,7 +22,8 @@ const PodcastResult = (props) => {
                 // Using math to get the length in minutes
                 const lengthInMin = Math.round(list.audio_length_sec / 60);
                 const Description = removeTags(list.description_original);
-                const newDescription = removeLinks(Description)
+                const newDescription = Description.split(".")[0] // cutting the description after the first sentence because there is some links and email address that trigger design issues
+            
                 return (
                   <li key={list.id}>
                     <div className="title">
@@ -47,7 +42,7 @@ const PodcastResult = (props) => {
                           alt={`Podcast logo for: ${list.title_original}`}
                         />
                       </div>
-                      <p className="podDesc">{newDescription}</p>
+                      <p className="podDesc">{newDescription}.</p>
                     </div>
                   </li>
                 );

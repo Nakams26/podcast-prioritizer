@@ -195,7 +195,7 @@ const UserSearch = () => {
             type: "podcast",
             only_in: "title,description",
             language: "English",
-            page_size: 10,
+            page_size: 9,
           })
           .then((response) => {
             setMessagePodcast("");

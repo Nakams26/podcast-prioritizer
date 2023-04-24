@@ -4,9 +4,18 @@
       font-size: 3rem;
     }
   }
+  .flexSection{
+    flex-direction: column;
+  }
+  .form{
+    width: 100%;
+  }
+  .travelResult{
+    width: 100%;
+  }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 666px) {
   .welcomePage {
     h1 {
       font-size: 2.5rem;
@@ -19,22 +28,23 @@
       width: 400px;
     }
   }
-  .flexSection{
-    flex-direction: column;
-  }
-  .form{
-    width: 100%;
-  }
-  .travelResult{
-    width: 100%;
-  }
+  
 .podcastResult{
   ul{
     justify-content: center;
     li{
       padding-bottom: 50px;
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      
     }
   }
+   .podDesc {
+    max-width: 100%;
+   }
 
 }
 }
