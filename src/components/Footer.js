@@ -1,10 +1,12 @@
 const footer = () => {
   return (
-    <div className="wrapper">
+ 
       <footer>
+           <div className="wrapper">
         <p>AP © 2023</p>
+        </div>
       </footer>
-    </div>
+
   );
 };
 

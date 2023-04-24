@@ -3,8 +3,9 @@
 footer {
     background-color: $primaryColor;
     color: $secondaryColor;
-    position: relative;
-    bottom: -30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     text-align: center;
 
 }

@@ -165,14 +165,14 @@ const UserSearch = () => {
       let minLength;
       let maxLength;
       if (userChoice === "walk") {
-        minLength = totalWalkMinutes - 10;
-        maxLength = totalWalkMinutes + 10;
+        minLength = totalWalkMinutes - 5;
+        maxLength = totalWalkMinutes + 5;
       } else if (userChoice === "bike") {
-        minLength = totalBikeMinutes - 10;
-        maxLength = totalBikeMinutes + 10;
+        minLength = totalBikeMinutes - 5;
+        maxLength = totalBikeMinutes + 5;
       } else if (userChoice === "drive") {
-        minLength = totalDriveMinutes - 10;
-        maxLength = totalDriveMinutes + 10;
+        minLength = totalDriveMinutes - 5;
+        maxLength = totalDriveMinutes + 5;
       } else {
         minLength = 0;
         maxLength = 6000;
@@ -193,7 +193,7 @@ const UserSearch = () => {
             type: "podcast",
             only_in: "title,description",
             language: "English",
-            page_size: 6,
+            page_size: 10,
           })
           .then((response) => {
             setMessagePodcast("");
@@ -222,7 +222,7 @@ const UserSearch = () => {
 
   return (
     <main>
-        <div className="flexSection wrapper">
+       <div className="flexSection wrapper">
         <Form
           onSubmitTest={submit}
           setFrom={handleFrom}
@@ -243,7 +243,6 @@ const UserSearch = () => {
           search={podcastSearch}
         />
         <p>{to.trim()==="" || from.trim() === "" || podcastSearch.trim() ==="" ? message :null}</p>
-
     </main>
   );
 };

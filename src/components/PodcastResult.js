@@ -7,6 +7,12 @@ const PodcastResult = (props) => {
     // HTML tag with a null string.
     return str.replace(/(<([^>]+)>)/gi, "");
   }
+  function removeLinks(str) {
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return str.replace(/Support this podcast: https:/gi, "");
+  }
   return (
     <section className="podcastResult">
       <div className="wrapper">
@@ -14,7 +20,7 @@ const PodcastResult = (props) => {
         {(props.podcastList.length === 0 && props.search.trim() !== "") ||
         props.podcastList.length !== 0 ? (
           <>
-            <p> <span>Step 3: </span>Select your podcast!</p>
+            <p className="sectionTitle"> <span>Step 3: </span>Select your podcast! Click on the title to get more infos!</p>
             <p>{props.message}</p>
             <ul>
               {props.podcastList.map((list) => {
@@ -23,12 +29,15 @@ const PodcastResult = (props) => {
                 const newDescription = removeTags(list.description_original);
                 return (
                   <li key={list.id}>
+                    <div className="title">
                     <h3>
                       <a href={list.website} target="_blank">
                         {list.title_original}
                       </a>
                     </h3>
-                    duration : {lengthInMin} min
+                  
+                    <p className="length">{lengthInMin} min</p>
+                    </div>
                     <div className="podInfo">
                       <div className="imgContainer">
                         <img
@@ -44,7 +53,7 @@ const PodcastResult = (props) => {
             </ul>
           </>
         ) : null}
-      </div>
+        </div>
     </section>
   );
 };

@@ -98,7 +98,6 @@ const Form = (props) => {
     });
   return (
     <section className="form">
-
     <p> <span>Step 1:</span>  Please enter your travel and a podcast topic!</p>
     <form
     className="formFlex"

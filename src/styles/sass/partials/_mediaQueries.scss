@@ -19,6 +19,24 @@
       width: 400px;
     }
   }
+  .flexSection{
+    flex-direction: column;
+  }
+  .form{
+    width: 100%;
+  }
+  .travelResult{
+    width: 100%;
+  }
+.podcastResult{
+  ul{
+    justify-content: center;
+    li{
+      padding-bottom: 50px;
+    }
+  }
+
+}
 }
 
 @media (max-width: 500px) {
