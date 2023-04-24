@@ -7,11 +7,12 @@ const PodcastResult = (props) => {
     // HTML tag with a null string.
     return str.replace(/(<([^>]+)>)/gi, "");
   }
+
   function removeLinks(str) {
     // Regular expression to identify HTML tags in
     // the input string. Replacing the identified
     // HTML tag with a null string.
-    return str.replace(/Support this podcast: https:/gi, "");
+    return str.replace(/(Support this podcast: https:\/\/podcasters\.spotify.com\/pod\/show\/)/gi, "");
   }
   return (
     <section className="podcastResult">
@@ -26,7 +27,8 @@ const PodcastResult = (props) => {
               {props.podcastList.map((list) => {
                 // Using math to get the length in minutes
                 const lengthInMin = Math.round(list.audio_length_sec / 60);
-                const newDescription = removeTags(list.description_original);
+                const Description = removeTags(list.description_original);
+                const newDescription = removeLinks(Description)
                 return (
                   <li key={list.id}>
                     <div className="title">

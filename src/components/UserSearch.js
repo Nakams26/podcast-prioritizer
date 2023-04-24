@@ -116,6 +116,7 @@ const UserSearch = () => {
         if (resp.data.info.statuscode === 0) {
           switch (routeType) {
             case "pedestrian":
+              default:
               setWalkTime(resp.data.route.formattedTime);
               setMessageTravel("");
               break;
@@ -131,6 +132,7 @@ const UserSearch = () => {
         } else if (resp.data.info.statuscode === 402) {
           switch (routeType) {
             case "pedestrian":
+              default:
               setWalkTime("0");
               setMessageTravel("Sorry, no route was found.");
               break;
