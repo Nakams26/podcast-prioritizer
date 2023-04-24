@@ -1,8 +1,14 @@
+@use "./variables" as *;
+
 @media (max-width: 940px) {
   .welcomePage {
     h1 {
       font-size: 3rem;
       margin-top: 4rem;
+      text-shadow: none;
+    }
+    .textWelcome{
+      -webkit-text-stroke: 1px $secondaryColor;
     }
   }
   .flexSection{
