@@ -17,12 +17,15 @@ const PodcastResult = (props) => {
           <>
             <p className="sectionTitle"> <span>Step 3: </span>Select your podcast! Click on the title to get more infos!</p>
             <p>{props.message}</p>
+            {/* Adding biking disclaimer */}
+            <p className="bikeMessage">{props.userChoice === "bike" &&  props.podcastList.length !== 0 ? " ⚠️  You chose biking, please note we don't recommend using headphones while biking  ⚠️" : null }</p>
             <ul>
               {props.podcastList.map((list) => {
                 // Using math to get the length in minutes
                 const lengthInMin = Math.round(list.audio_length_sec / 60);
                 const Description = removeTags(list.description_original);
-                const newDescription = Description.split(".")[0] // cutting the description after the first sentence because there is some links and email address that trigger design issues
+                // cutting the description after the first sentence because there is some links and email address that trigger design issues
+                const newDescription = Description.split(".")[0] 
             
                 return (
                   <li key={list.id}>

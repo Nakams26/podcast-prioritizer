@@ -90,6 +90,7 @@ const UserSearch = () => {
   const submit = (e) => {
     e.preventDefault();
     setUserChoice("");
+    //When submitting travel and podcast topic, I check if input are fill with space. If yes, displaying a message and emptying other components
     if (from.trim() === "" || to.trim() === "" || podcastSearch.trim() === "") {
       setPodcastList([]);
       setWalkTime("0");
@@ -167,6 +168,7 @@ const UserSearch = () => {
       let minLength;
       let maxLength;
       if (userChoice === "walk") {
+        // Adjusting podcast length search to +- 5 min compare to travel length
         minLength = totalWalkMinutes - 5;
         maxLength = totalWalkMinutes + 5;
       } else if (userChoice === "bike") {
@@ -180,7 +182,7 @@ const UserSearch = () => {
         maxLength = 6000;
       }
       setPodcastList([]);
-
+      // Max length accepted by API is 6000 
       if (maxLength <= 6000) {
         setMessagePodcast("Please wait, podcasts are loading");
         const { Client } = require("podcast-api");
@@ -243,6 +245,7 @@ const UserSearch = () => {
           message={messagePodcast}
           podcastList={podcastList}
           search={podcastSearch}
+          userChoice={userChoice}
         />
         <p>{to.trim()==="" || from.trim() === "" || podcastSearch.trim() ==="" ? message :null}</p>
     </main>
