@@ -11,32 +11,41 @@ const PodcastResult = (props) => {
   return (
     <section className="podcastResult">
       <div className="wrapper">
+        <p>{props.errorMessage}</p>
+        <p>{props.message}</p>
         {/* Display the section only if we have a results. If no result but the search was not empty, then I display the error message */}
-        {(props.podcastList.length === 0 && props.search.trim() !== "") ||
-        props.podcastList.length !== 0 ? (
+        {props.podcastList.length !== 0 ? (
           <>
-            <p className="sectionTitle"> <span>Step 3: </span>Select your podcast! Click on the title to get more infos!</p>
-            <p>{props.message}</p>
+            <p className="sectionTitle">
+              {" "}
+              <span>Step 3: </span>Select your podcast! Click on the title to
+              get more infos!
+            </p>
+
             {/* Adding biking disclaimer */}
-            <p className="bikeMessage">{props.userChoice === "bike" &&  props.podcastList.length !== 0 ? " ⚠️  You chose biking, please note we don't recommend using headphones while biking  ⚠️" : null }</p>
+            <p className="bikeMessage">
+              {props.userChoice === "bike" && props.podcastList.length !== 0
+                ? " ⚠️  You chose biking, please note we don't recommend using headphones while biking  ⚠️"
+                : null}
+            </p>
             <ul>
               {props.podcastList.map((list) => {
                 // Using math to get the length in minutes
                 const lengthInMin = Math.round(list.audio_length_sec / 60);
                 const Description = removeTags(list.description_original);
                 // cutting the description after the first sentence because there is some links and email address that trigger design issues
-                const newDescription = Description.split(".")[0] 
-            
+                const newDescription = Description.split(".")[0];
+
                 return (
                   <li key={list.id}>
                     <div className="title">
-                    <h3>
-                      <a href={list.website} target="_blank">
-                        {list.title_original}
-                      </a>
-                    </h3>
-                  
-                    <p className="length">{lengthInMin} min</p>
+                      <h3>
+                        <a href={list.website} target="_blank">
+                          {list.title_original}
+                        </a>
+                      </h3>
+
+                      <p className="length">{lengthInMin} min</p>
                     </div>
                     <div className="podInfo">
                       <div className="imgContainer">
@@ -53,7 +62,7 @@ const PodcastResult = (props) => {
             </ul>
           </>
         ) : null}
-        </div>
+      </div>
     </section>
   );
 };

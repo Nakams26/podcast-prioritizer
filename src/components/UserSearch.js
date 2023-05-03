@@ -30,6 +30,12 @@ const UserSearch = () => {
   const handleTo = (event, toLocation) => {
     setTo(toLocation);
   };
+  //LANGUAGE
+  //Defining language selection  (coming form form component)
+  const [language, setLanguage] = useState("");
+  const handleLanguage = (event, languageChoice) => {
+    setLanguage(languageChoice);
+  };
 
   //PODCAST
   //Defining podcast search  (coming form form component)
@@ -46,7 +52,7 @@ const UserSearch = () => {
   //Adding userChoice (When user is clicking on biking, driving or walking)
   const [userChoice, setUserChoice] = useState("");
 
-  //Handling userrChoice
+  //Handling userChoice
   const handleUserChoice = (e, travelChoice) => {
     e.preventDefault();
     setUserChoice(travelChoice);
@@ -97,6 +103,8 @@ const UserSearch = () => {
       setBikeTime("0");
       setDriveTime("0");
       setMessage("Please enter a valid search");
+    } else {
+      setMessage("");
     }
   };
 
@@ -117,7 +125,7 @@ const UserSearch = () => {
         if (resp.data.info.statuscode === 0) {
           switch (routeType) {
             case "pedestrian":
-              default:
+            default:
               setWalkTime(resp.data.route.formattedTime);
               setMessageTravel("");
               break;
@@ -133,7 +141,7 @@ const UserSearch = () => {
         } else if (resp.data.info.statuscode === 402) {
           switch (routeType) {
             case "pedestrian":
-              default:
+            default:
               setWalkTime("0");
               setMessageTravel("Sorry, no route was found.");
               break;
@@ -182,9 +190,10 @@ const UserSearch = () => {
         maxLength = 6000;
       }
       setPodcastList([]);
-      // Max length accepted by API is 6000 
+      // Max length accepted by API is 6000
       if (maxLength <= 6000) {
         setMessagePodcast("Please wait, podcasts are loading");
+        setMessage("");
         const { Client } = require("podcast-api");
         const client = Client({ apiKey: "84ea935001f44836a966c059250896de" });
         client
@@ -196,7 +205,7 @@ const UserSearch = () => {
             len_max: maxLength,
             type: "podcast",
             only_in: "title,description",
-            language: "English",
+            language: language,
             page_size: 9,
           })
           .then((response) => {
@@ -222,16 +231,17 @@ const UserSearch = () => {
         );
       }
     }
-  }, [from, to, podcastSearch, userChoice]);
+  }, [from, to, podcastSearch, userChoice, language]);
 
   return (
     <main>
-       <div className="flexSection wrapper">
+      <div className="flexSection wrapper">
         <Form
           onSubmitTest={submit}
           setFrom={handleFrom}
           setTo={handleTo}
           setPodcast={handlePodcastSearch}
+          setLanguage={handleLanguage}
         />
         <TravelResult
           message={messageTravel}
@@ -240,14 +250,14 @@ const UserSearch = () => {
           drive={driveTime}
           userChoice={handleUserChoice}
         />
-        </div>
-        <PodcastResult
-          message={messagePodcast}
-          podcastList={podcastList}
-          search={podcastSearch}
-          userChoice={userChoice}
-        />
-        <p>{to.trim()==="" || from.trim() === "" || podcastSearch.trim() ==="" ? message :null}</p>
+      </div>
+      <PodcastResult
+        errorMessage={message}
+        message={messagePodcast}
+        podcastList={podcastList}
+        search={podcastSearch}
+        userChoice={userChoice}
+      />
     </main>
   );
 };

@@ -8,9 +8,15 @@ import { useState } from "react";
 const Form = (props) => {
   //Podcast variable
   const [podcast, setPodcast] = useState("");
+  const [language, setLanguage] = useState("");
   const handlePodcast = (e) => {
     // Update the keyword of the input element
     setPodcast(e.target.value);
+  };
+
+  const handleLanguage = (e) => {
+    // Update the keyword of the select element
+    setLanguage(e.target.value);
   };
   //From variable
   const {
@@ -98,58 +104,66 @@ const Form = (props) => {
     });
   return (
     <section className="form">
-    <p> <span>Step 1:</span>  Please enter your travel and a podcast topic!</p>
-    <form
-    className="formFlex"
-      onSubmit={(event) => {
-        // Using props to pass data to the parent element
-        props.setFrom(event, valueFrom);
-        props.setTo(event, valueTo);
-        props.setPodcast(event, podcast);
-        props.onSubmitTest(event);
-      }}
-      action=""
-    >
-      <div ref={refFrom}>
-        <label htmlFor="from" className="sr-only">
-          Where are you starting from?
-        </label>
+      <p>
+        {" "}
+        <span>Step 1:</span> Enter your travel, a podcast topic and language!
+      </p>
+      <form
+        className="formFlex"
+        onSubmit={(event) => {
+          // Using props to pass data to the parent element
+          props.setFrom(event, valueFrom);
+          props.setTo(event, valueTo);
+          props.setPodcast(event, podcast);
+          props.setLanguage(event, language);
+          props.onSubmitTest(event);
+        }}
+        action=""
+      >
+        <div ref={refFrom}>
+          <label htmlFor="from" className="sr-only">
+            Where are you starting from?
+          </label>
+          <input
+            required
+            id="from"
+            value={valueFrom}
+            onChange={handleInputFrom}
+            disabled={!readyFrom}
+            placeholder="Where are you starting from?"
+          />
+          {/* We can use the "status" to decide whether we should display the dropdown or not */}
+          {statusFrom === "OK" && <ul>{renderSuggestionsFrom()}</ul>}
+        </div>
+        <div ref={refTo}>
+          <label htmlFor="to" className="sr-only">
+            Where are you heading to?
+          </label>
+          <input
+            required
+            id="to"
+            value={valueTo}
+            onChange={handleInputTo}
+            disabled={!readyTo}
+            placeholder="Where are you heading to?"
+          />
+          {/* We can use the "status" to decide whether we should display the dropdown or not */}
+          {statusTo === "OK" && <ul>{renderSuggestionsTo()}</ul>}
+        </div>
+        <label htmlFor="podcast"></label>
         <input
           required
-          id="from"
-          value={valueFrom}
-          onChange={handleInputFrom}
-          disabled={!readyFrom}
-          placeholder="Where are you starting from?"
+          id="podcast"
+          type="text"
+          onChange={handlePodcast}
+          placeholder="Search for type of podcast (i.e 'cooking' or 'raptors)'"
         />
-        {/* We can use the "status" to decide whether we should display the dropdown or not */}
-        {statusFrom === "OK" && <ul>{renderSuggestionsFrom()}</ul>}
-      </div>
-      <div ref={refTo}>
-        <label htmlFor="to" className="sr-only">
-          Where are you heading to?
-        </label>
-        <input
-          required
-          id="to"
-          value={valueTo}
-          onChange={handleInputTo}
-          disabled={!readyTo}
-          placeholder="Where are you heading to?"
-        />
-        {/* We can use the "status" to decide whether we should display the dropdown or not */}
-        {statusTo === "OK" && <ul>{renderSuggestionsTo()}</ul>}
-      </div>
-      <label htmlFor="podcast"></label>
-      <input
-        required
-        id="podcast"
-        type="text"
-        onChange={handlePodcast}
-        placeholder="Search for type of podcast (i.e 'cooking' or 'raptors)'"
-      />
-      <button type="submit">Submit</button>
-    </form>
+        <select onChange={handleLanguage} name="language" id="language">
+          <option value="English">English</option>
+          <option value="French">Français</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
     </section>
   );
 };
